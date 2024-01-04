@@ -137,7 +137,7 @@ public abstract class StationTimeSeriesFeatureImpl extends PointCollectionImpl i
     private CalendarDateRange filter_date;
 
     public StationFeatureSubset(StationTimeSeriesFeatureImpl from, CalendarDateRange filter_date) {
-      super(from.s, from.getTimeUnit(), from.getAltUnits(), -1);
+      super(from.s, from.getTimeName(), from.getTimeUnit(), from.getAltName(), from.getAltUnits(), -1);
       this.from = from;
       this.filter_date = filter_date;
     }

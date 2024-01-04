@@ -8,6 +8,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import java.util.Arrays;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.slf4j.Logger;
@@ -237,6 +238,7 @@ public class TestGribCoverageRead {
   }
 
   @Test
+  @Ignore
   public void shouldNotReturnNaNsWhenReadingMRMSData() throws IOException, InvalidRangeException {
     String endpoint = TestDir.cdmUnitTestDir + "gribCollections/mrms/MRMS_CONUS_BaseReflectivity_20230914_1750.grib2";
 

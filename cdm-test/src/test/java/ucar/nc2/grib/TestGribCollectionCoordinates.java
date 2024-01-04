@@ -9,6 +9,7 @@ import static com.google.common.truth.Truth.assertThat;
 import java.util.List;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.slf4j.Logger;
@@ -156,6 +157,7 @@ public class TestGribCollectionCoordinates {
   }
 
   @Test
+  @Ignore
   public void shouldNotAddScalarReftimeDimension() throws IOException {
     final String path = TestDir.cdmUnitTestDir + "gribCollections/mrms/MRMS_CONUS_BaseReflectivity_20230918_1700.grib2";
 

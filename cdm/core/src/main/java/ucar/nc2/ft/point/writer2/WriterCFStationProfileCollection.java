@@ -46,7 +46,7 @@ import ucar.nc2.time.CalendarDateUnit;
  * @author caron
  * @since 7/14/2014
  */
-class WriterCFStationProfileCollection extends WriterCFPointAbstract {
+public class WriterCFStationProfileCollection extends WriterCFPointAbstract {
   private static Logger log = LoggerFactory.getLogger(WriterCFStationProfileCollection.class);
 
   private List<StationFeature> stnList;

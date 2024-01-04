@@ -24,7 +24,10 @@ import ucar.nc2.NetcdfFileWriter;
 import ucar.nc2.NetcdfFileWriter.Version;
 import ucar.nc2.NetcdfFiles;
 import ucar.nc2.Variable;
+import ucar.nc2.constants.AxisType;
 import ucar.nc2.constants.FeatureType;
+import ucar.nc2.dataset.CoordinateAxis;
+import ucar.nc2.dataset.NetcdfDataset;
 import ucar.nc2.dataset.NetcdfDatasets;
 import ucar.nc2.ft.FeatureDataset;
 import ucar.nc2.ft.FeatureDatasetFactoryManager;
@@ -123,16 +126,35 @@ public class TestCFPointWriterCompare {
       long tookNew = System.currentTimeMillis() - start;
       System.out.printf(" CFPointWriterNew nrecords written = %d took=%d msecs%n", countNew, tookNew);
       assert countNew == countExpected : "count =" + countNew + " expected " + countExpected;
-
+      System.out.printf("Compare old and new outputs for: " + location);
       compare(fileOrg.getPath(), fileNew.getPath());
+
+      compareToFileIn(fileIn.getPath(), fileOrg.getPath());
+      compareToFileIn(fileIn.getPath(), fileNew.getPath());
     }
+  }
+
+  private Boolean compareToFileIn(String fileIn, String writtenFile) throws IOException {
+    try (NetcdfDataset inDataset = NetcdfDatasets.openDataset(fileIn);
+        NetcdfDataset writtenDataset = NetcdfDatasets.openDataset(writtenFile)) {
+      if (inDataset.findCoordinateAxis(AxisType.Time) != null)
+        assertThat(
+            inDataset.findCoordinateAxis(AxisType.Time).compareTo(writtenDataset.findCoordinateAxis(AxisType.Time)))
+                .isEqualTo(0);
+      if (inDataset.findCoordinateAxis(AxisType.Height) != null)
+        assertThat(
+            inDataset.findCoordinateAxis(AxisType.Height).compareTo(writtenDataset.findCoordinateAxis(AxisType.Height)))
+                .isEqualTo(0);
+    }
+
+    return false;
   }
 
   private static void compare(String fileOrg, String fileNew) throws IOException {
     // Compare that the files are identical
     try (NetcdfFile org = NetcdfDatasets.openDataset(fileOrg); NetcdfFile copy = NetcdfDatasets.openDataset(fileNew)) {
       Formatter f = new Formatter();
-      CompareNetcdf2 compare = new CompareNetcdf2(f, false, false, true);
+      CompareNetcdf2 compare = new CompareNetcdf2(f, true, true, true);
       boolean ok = compare.compare(org, copy, new FileWritingObjFilter());
       System.out.printf("%s %s%n", ok ? "OK" : "NOT OK", f);
       assertThat(ok).isTrue();

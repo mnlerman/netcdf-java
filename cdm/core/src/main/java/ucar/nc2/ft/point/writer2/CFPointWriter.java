@@ -122,6 +122,7 @@ public class CFPointWriter {
         dataset.getDataVariables(), fc.getTimeUnit(), fc.getAltUnits(), config)) {
 
 
+
       List<StationFeature> flattenFeatures = new ArrayList<>();
       List<Variable> extraVariables = new ArrayList<>();
       for (DsgFeatureCollection featureCollection : dataset.getPointFeatureCollectionList()) {

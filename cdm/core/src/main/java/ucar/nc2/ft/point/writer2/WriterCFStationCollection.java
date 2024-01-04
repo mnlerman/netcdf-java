@@ -46,7 +46,7 @@ import ucar.nc2.time.CalendarDateUnit;
  * @author caron
  * @since Aug 19, 2009
  */
-class WriterCFStationCollection extends WriterCFPointAbstract {
+public class WriterCFStationCollection extends WriterCFPointAbstract {
 
   //////////////////////////////////////////////////////////
 
@@ -60,7 +60,7 @@ class WriterCFStationCollection extends WriterCFPointAbstract {
   private int desc_strlen = 1, wmo_strlen = 1;
   private HashSet<String> featureVarMap = new HashSet<>();
 
-  WriterCFStationCollection(String fileOut, AttributeContainer atts, List<VariableSimpleIF> dataVars,
+  public WriterCFStationCollection(String fileOut, AttributeContainer atts, List<VariableSimpleIF> dataVars,
       CalendarDateUnit timeUnit, String altUnits, CFPointWriterConfig config) throws IOException {
     super(fileOut, atts, dataVars, timeUnit, altUnits, config);
     writerb.addAttribute(new Attribute(CF.FEATURE_TYPE, CF.FeatureType.timeSeries.name()));
@@ -74,7 +74,7 @@ class WriterCFStationCollection extends WriterCFPointAbstract {
     stationStruct = findStructure(stationStructName);
   }
 
-  protected void writeHeader(List<StationFeature> stations) throws IOException {
+  public void writeHeader(List<StationFeature> stations) throws IOException {
     this.stnList = stations.stream().distinct().collect(Collectors.toList());
     List<VariableSimpleIF> coords = new ArrayList<>();
     List<PointFeatureCollection> flattenStations = new ArrayList<>();
@@ -192,7 +192,7 @@ class WriterCFStationCollection extends WriterCFPointAbstract {
 
   private int obsRecno;
 
-  protected void writeObsData(PointFeature pf) throws IOException {
+  public void writeObsData(PointFeature pf) throws IOException {
     trackBB(null, pf.getObservationTimeAsCalendarDate());
     String stationName = pf.getFeatureCollection().getName();
     Integer parentIndex = stationIndexMap.get(stationName);

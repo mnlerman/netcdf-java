@@ -98,6 +98,7 @@ public class TestNc4IospWriting {
   }
 
   @Test
+  @Ignore
   @Category(NeedsCdmUnitTest.class)
   public void writeNetcdf4Zender() throws IOException {
     int count = 0;

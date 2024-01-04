@@ -37,7 +37,7 @@ public class CFPointWriterConfig {
     return NetcdfFormatWriter.convertToNetcdfFileWriterVersion(format);
   }
 
-  private CFPointWriterConfig(Builder builder) {
+  public CFPointWriterConfig(Builder builder) {
     this.format = builder.format;
     this.chunking = builder.chunking;
     this.noTimeCoverage = builder.noTimeCoverage;

@@ -210,7 +210,7 @@ abstract class WriterCFPointAbstract implements Closeable {
     }
 
     for (PointFeatureCollection stnFeature : stationFeatures) {
-      PeekingIterator<PointFeature> iter = Iterators.peekingIterator(stnFeature.iterator());
+      PeekingIterator<PointFeature> iter = Iterators.peekingIterator(stnFeature.getPointFeatureIterator());
       if (iter.hasNext()) {
         PointFeature pointFeat = iter.peek();
 

@@ -183,7 +183,7 @@ public class WriterCFStationCollection extends CFPointWriter {
     if (s instanceof DsgFeatureCollection) {
       DsgFeatureCollection dsgStation = (DsgFeatureCollection) s;
       writeRecord(dsgStation.getName(), dsgStation.getTimeName(), sobs.getObservationTime(),
-          sobs.getObservationTimeAsCalendarDate(), altitudeCoordinateName, sobs.getLocation().getAltitude(), sdata);
+          sobs.getObservationTimeAsCalendarDate(), dsgStation.getAltName(), sobs.getLocation().getAltitude(), sdata);
     } else {
       writeRecord(s.getName(), sobs.getFeatureCollection().getTimeName(), sobs.getObservationTime(),
           sobs.getObservationTimeAsCalendarDate(), altitudeCoordinateName, sobs.getLocation().getAltitude(), sdata);
